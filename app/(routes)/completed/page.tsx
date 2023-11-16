@@ -1,10 +1,10 @@
 import Container from "@/components/Container";
 
-export default function Home() {
+export default function CompletedTasks() {
   return (
     <main className="py-6">
       <Container>
-        <div>Home</div>
+        <div>Tasks</div>
       </Container>
     </main>
   );

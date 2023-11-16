@@ -1,10 +1,10 @@
 import Container from "@/components/Container";
 
-export default function Home() {
+export default function UrgentTasks() {
   return (
     <main className="py-6">
       <Container>
-        <div>Home</div>
+        <div>Do it Now</div>
       </Container>
     </main>
   );
