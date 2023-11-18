@@ -1,10 +1,11 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
-import taskReducer from "@/redux/taskSlice";
+import modalReducer from "@/redux/modalSlice";
+
 export const store = configureStore({
   reducer: {
-    task: taskReducer,
+    modal: modalReducer,
   },
 });
 

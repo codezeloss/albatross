@@ -9,9 +9,9 @@ import Container from "@/components/Container";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t mt-auto bottom-0 absolute">
+    <footer className="w-full border-t mt-auto max-h-16">
       <Container>
-        <div className="w-full h-16 flex items-center justify-between px-6">
+        <div className="w-full h-16 max-h-16 flex items-center justify-between px-6">
           <p className="text-left text-xs dark:text-white text-muted-foreground">
             &copy;2024 albatross. All rights reserved.
           </p>

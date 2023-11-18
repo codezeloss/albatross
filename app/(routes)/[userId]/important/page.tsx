@@ -2,10 +2,10 @@ import Container from "@/components/Container";
 
 export default function ImportantTasks() {
   return (
-    <main className="py-6">
+    <div className="">
       <Container>
         <div>Important</div>
       </Container>
-    </main>
+    </div>
   );
 }

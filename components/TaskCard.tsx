@@ -12,57 +12,76 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Edit3Icon, EditIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { TaskProps } from "@/types";
+import { formatDate } from "@/lib/utils";
 
-export function TaskCard() {
+export function TaskCard({
+  id,
+  title,
+  description,
+  date,
+  isCompleted,
+  isImportant,
+}: TaskProps) {
   return (
-    <Card className="w-full shadow-0">
+    <Card className="w-full shadow-0 flex flex-col justify-between">
       <CardHeader>
-        <CardTitle className="text-xl font-normal">Create project</CardTitle>
-        <CardDescription className="font-normal">
-          Deploy your new project in one-click Deploy your new project in
-          one-click Deploy your new project in one-click Deploy your new project
-          in one-click..
+        <CardTitle className="text-xl font-normal">{title}</CardTitle>
+        <CardDescription className="font-normal w-full">
+          {description}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="-mb-3">
-        <div>
-          <p className="text-xs font-light text-muted-foreground">
-            Created: 15 Aug 2024
-          </p>
-        </div>
-      </CardContent>
+      <div>
+        <CardContent className="-mb-3">
+          <div>
+            <p className="text-xs font-light text-muted-foreground">
+              Date: {formatDate(date)}
+            </p>
+          </div>
+        </CardContent>
 
-      <CardFooter className="flex justify-between">
-        <div>
-          <Button
-            className="bg-green-500 text-white font-medium hover:bg-green-400"
-            size="sm"
-            variant="default"
-          >
-            Completed
-          </Button>
-        </div>
+        <CardFooter className="flex justify-between">
+          <div>
+            {isCompleted ? (
+              <Button
+                className="bg-green-600 text-white font-medium hover:bg-green-400"
+                size="sm"
+                variant="default"
+              >
+                Completed
+              </Button>
+            ) : (
+              <Button
+                className="bg-red-600 text-white font-medium hover:bg-green-400"
+                size="sm"
+                variant="default"
+              >
+                Incomplete
+              </Button>
+            )}
+          </div>
 
-        <div className="flex items-center gap-x-2">
-          <Button
-            className="flex items-center gap-x-2"
-            size="sm"
-            variant="outline"
-          >
-            <PencilIcon size={16} />
-            Edit
-          </Button>
-          <Button
-            className="flex items-center gap-x-2"
-            size="sm"
-            variant="outline"
-          >
-            <Trash2Icon size={16} />
-            Delete
-          </Button>
-        </div>
-      </CardFooter>
+          <div className="flex items-center gap-x-2">
+            <Button
+              className="flex items-center gap-x-2"
+              size="sm"
+              variant="outline"
+            >
+              <PencilIcon size={16} />
+              Edit
+            </Button>
+            <Button
+              className="flex items-center gap-x-2"
+              size="sm"
+              variant="outline"
+            >
+              <Trash2Icon size={16} />
+              Delete
+            </Button>
+          </div>
+        </CardFooter>
+      </div>
     </Card>
   );
 }

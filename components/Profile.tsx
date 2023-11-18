@@ -1,0 +1,86 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
+import { LogOutIcon } from "lucide-react";
+import Link from "next/link";
+import Spinner from "@/components/ui/spinner";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+interface Props {
+  img_src: any;
+  username: string | undefined | null;
+  status: string;
+}
+
+export default function Profile({ img_src, username, status }: Props) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignOut = async () => {
+    router.refresh();
+    router.push("/");
+  };
+
+  if (status === "loading") return <Spinner />;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="cursor-pointer hover:shadow-xl" asChild>
+        <Image
+          className="rounded-full border-2 border-black dark:border-white"
+          src={img_src}
+          alt="User profile image"
+          width={40}
+          height={40}
+        />
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent className="w-56 pb-4">
+        <DropdownMenuLabel className="font-medium">
+          {username ? username : "My Account"}
+        </DropdownMenuLabel>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <Link href="/">
+            <DropdownMenuItem>Home</DropdownMenuItem>
+          </Link>
+        </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <Link href="/dashboard">
+            <DropdownMenuItem>Dashboard</DropdownMenuItem>
+          </Link>
+        </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <Link href="/create-post">
+            <DropdownMenuItem>Create Post</DropdownMenuItem>
+          </Link>
+        </DropdownMenuGroup>
+        <DropdownMenuGroup className="w-full px-2 mt-2">
+          <Button
+            disabled={isLoading}
+            className="w-full flex gap-x-2 items-center font-medium"
+            variant="destructive"
+            size="default"
+            onClick={handleSignOut}
+          >
+            <LogOutIcon size={16} />
+            Sign out
+          </Button>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

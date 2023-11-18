@@ -8,6 +8,9 @@ import Navbar from "@/components/Navbar";
 import { MainNavigation } from "@/components/MainNavigation";
 import Container from "@/components/Container";
 import Footer from "@/components/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
+import { CreateTaskModal } from "@/components/CreateTaskModal";
+import { Toaster } from "@/components/ui/toaster";
 
 const righteous = Righteous({
   subsets: ["latin"],
@@ -21,28 +24,34 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={righteous.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ReduxProvider>
-            <div className="w-full h-full min-h-screen">
-              <Navbar />
-              <main className="p-6 w-full h-full">
-                <Container>
-                  <MainNavigation />
-                  {children}
-                </Container>
-              </main>
-              <Footer />
-            </div>
-          </ReduxProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <ReduxProvider>
+        <html lang="en">
+          <body className={righteous.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div className="w-full h-full min-h-screen">
+                <Navbar />
+
+                <main className="px-6 w-full h-full pb-6 mb-8 sm:mb-11">
+                  <Container>
+                    <CreateTaskModal />
+                    <MainNavigation />
+                    {children}
+                    <Toaster />
+                  </Container>
+                </main>
+
+                <Footer />
+              </div>
+            </ThemeProvider>
+          </body>
+        </html>
+      </ReduxProvider>
+    </ClerkProvider>
   );
 }
