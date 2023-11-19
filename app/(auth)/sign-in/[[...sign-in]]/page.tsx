@@ -1,6 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import { KanbanSquare } from "lucide-react";
-import { dark, neobrutalism } from "@clerk/themes";
+import { dark } from "@clerk/themes";
 
 export default function UserSignIn() {
   return (
@@ -12,7 +12,7 @@ export default function UserSignIn() {
 
       <SignIn
         appearance={{
-          baseTheme: [dark, neobrutalism],
+          baseTheme: dark,
           variables: { colorPrimary: "#84cc16", colorText: "white" },
         }}
       />
