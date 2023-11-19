@@ -1,29 +1,17 @@
 import Container from "@/components/Container";
 import { TaskCard } from "@/components/TaskCard";
-import { PlusIcon } from "lucide-react";
 import AddTask from "@/components/ui/add-task";
-import { auth } from "@clerk/nextjs";
 import { TaskProps } from "@/types";
+import { getAllTasks } from "@/actions/getAllTasks";
 
-const getAllTasks = async (userId: string) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/${userId}/tasks`,
-      { cache: "no-cache" }
-    );
-
-    return await response.json();
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-};
-
-export default async function AllTasks() {
-  const { userId } = auth();
-
+export default async function AllTasks({
+  params,
+}: {
+  params: { userId: string };
+}) {
   let tasks: TaskProps[] = [];
-  if (userId) tasks = await getAllTasks(userId);
+
+  if (params.userId) tasks = await getAllTasks(params.userId);
 
   return (
     <div className="">

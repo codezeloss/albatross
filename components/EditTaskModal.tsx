@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import {
   Popover,
@@ -31,11 +32,8 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CalendarIcon } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { onClickClose } from "@/redux/modalSlice";
 import { useParams, useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -58,40 +56,63 @@ const formSchema = z.object({
   isImportant: z.boolean().default(false).optional(),
 });
 
-export function CreateTaskModal() {
+interface Props {
+  id: string;
+  isOpen: boolean;
+  setIsOpen: (arg: boolean) => void;
+  title: string;
+  date: Date;
+  description: string;
+  isCompleted: boolean;
+  isImportant: boolean;
+}
+
+export function EditTaskModal({
+  id,
+  isOpen,
+  setIsOpen,
+  title,
+  date,
+  description,
+  isCompleted,
+  isImportant,
+}: Props) {
   const { toast } = useToast();
-  const dispatch = useDispatch();
   const params = useParams();
   const router = useRouter();
 
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  // ** RTK - Modal
-  const { isOpen } = useSelector((state: any) => state.modal);
+  const [tasks, setTasks] = useState([]);
+  const [formattedDate, setFormattedDate] = useState({
+    theDate: new Date(date),
+  });
 
   // ** Form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      date: undefined,
-      isCompleted: false,
-      isImportant: false,
+      title: title || "",
+      description: description || "",
+      date: formattedDate.theDate || undefined,
+      isCompleted: isCompleted || false,
+      isImportant: isImportant || false,
     },
   });
 
   // !! Handle Form submission
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const taskId = id;
     try {
       setIsLoading(true);
-      const response = await axios.post(`/api/${params.userId}/tasks`, values);
+      const response = await axios.put(
+        `/api/${params.userId}/tasks/${taskId}`,
+        values
+      );
       if (response.data) {
-        form.reset();
-        dispatch(onClickClose());
+        setIsOpen(false);
         toast({
-          description: "Task added successfully",
+          description: "Task updated successfully",
         });
         router.refresh();
       }
@@ -101,7 +122,7 @@ export function CreateTaskModal() {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "Cannot add the Task, please try again",
+        description: "Cannot update the Task, please try again",
       });
     } finally {
       setIsLoading(false);
@@ -115,13 +136,11 @@ export function CreateTaskModal() {
   if (!isMounted) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={() => dispatch(onClickClose())}>
+    <Dialog open={isOpen} onOpenChange={() => setIsOpen(false)}>
       <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
-          <DialogTitle className="font-normal text-2xl">
-            Create New Task
-          </DialogTitle>
-          <DialogDescription>Add your new task</DialogDescription>
+          <DialogTitle className="font-normal text-2xl">Edit Task</DialogTitle>
+          <DialogDescription>Edit your task</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -231,7 +250,7 @@ export function CreateTaskModal() {
             </div>
 
             <Button disabled={isLoading} type="submit">
-              Submit
+              Update
             </Button>
           </form>
         </Form>

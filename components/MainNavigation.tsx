@@ -49,9 +49,9 @@ export function MainNavigation() {
       icon: <CheckCheck size={20} />,
     },
     {
-      href: `/${params.userId}/urgent`,
+      href: `/${params.userId}/inCompleted`,
       label: "Do it Now",
-      active: pathname === `/urgent`,
+      active: pathname === `/${params.userId}/inCompleted`,
       icon: <Hourglass size={20} />,
     },
   ];
@@ -62,7 +62,7 @@ export function MainNavigation() {
     <nav
       className={`w-full flex items-center justify-between gap-x-2 pt-6 pb-4 md:py-6 lg:py-8`}
     >
-      <div className="w-full flex items-center gap-4 flex-wrap">
+      <div className="w-full flex items-center gap-2 sm:gap-4 flex-wrap">
         {routes.map((route, index) => (
           <Link
             key={index}

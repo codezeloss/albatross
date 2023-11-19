@@ -5,7 +5,13 @@ import { redirect } from "next/navigation";
 export default function Home() {
   const { userId } = auth();
 
-  if (userId) redirect(`/${userId}/all-tasks`);
+  if (userId) {
+    redirect(`/${userId}/all-tasks`);
+  }
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   return (
     <main className="py-6">

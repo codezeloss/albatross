@@ -51,6 +51,9 @@ export async function GET(
       where: {
         userId: params.userId,
       },
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
 
     return NextResponse.json(tasks);
@@ -61,11 +64,33 @@ export async function GET(
 }
 
 // !! PUT
-export async function PUT(req: Request) {
+export async function PUT(
+  req: Request,
+  { params }: { params: { userId: string } }
+) {
   try {
+    const { id, isCompleted } = await req.json();
+
+    if (!params.userId) {
+      return NextResponse.json({ status: 401, error: "Unauthorized" });
+    }
+
+    const task = await prismadb.task.update({
+      where: {
+        id,
+      },
+      data: {
+        isCompleted,
+      },
+    });
+
+    return NextResponse.json(task);
   } catch (e) {
-    console.log("TASK_PUT", e);
-    return NextResponse.json({ status: 500, error: "Error updating task" });
+    console.log("TASK_STATUS_PUT", e);
+    return NextResponse.json({
+      status: 500,
+      error: "Error updating completed/inCompleted task",
+    });
   }
 }
 

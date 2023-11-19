@@ -34,10 +34,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               enableSystem
               disableTransitionOnChange
             >
-              <div className="w-full h-full min-h-screen">
+              <div className="w-full h-full min-h-screen flex flex-col justify-between">
                 <Navbar />
-
-                <main className="px-6 w-full h-full pb-6 mb-8 sm:mb-11">
+                <main className="px-3 sm:px-6 w-full h-full pb-6 mb-8 sm:mb-11">
                   <Container>
                     <CreateTaskModal />
                     <MainNavigation />
@@ -45,7 +44,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     <Toaster />
                   </Container>
                 </main>
-
                 <Footer />
               </div>
             </ThemeProvider>

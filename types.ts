@@ -5,7 +5,4 @@ export interface TaskProps {
   date: Date;
   isCompleted: boolean;
   isImportant: boolean;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
 }

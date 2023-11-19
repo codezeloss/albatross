@@ -13,7 +13,7 @@ import {
 
 export default function Navbar() {
   return (
-    <header className="px-6 border-b-4 border-b-[#84cc16] text-black dark:text-white">
+    <header className="px-3 md:px-6 border-b-4 border-b-[#84cc16] text-black dark:text-white">
       <Container>
         <div className="flex items-center justify-between h-20">
           <Link
@@ -25,14 +25,11 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center space-x-3">
-            <div className="border-2 rounded-full border-black dark:border-[#84cc16] w-10 h-10 flex items-center justify-center">
-              <SignedIn>
-                <UserButton
-                  afterSignOutUrl="/sign-in"
-                  userProfileMode="modal"
-                />
-              </SignedIn>
-            </div>
+            <SignedIn>
+              <div className="border-2 rounded-full border-black dark:border-[#84cc16] w-10 h-10 flex items-center justify-center">
+                <UserButton afterSignOutUrl="/" userProfileMode="modal" />
+              </div>
+            </SignedIn>
 
             <SignedOut>
               <div className="flex items-center gap-x-2">
