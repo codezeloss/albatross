@@ -1,6 +1,7 @@
 import { SignIn } from "@clerk/nextjs";
 import { KanbanSquare } from "lucide-react";
 import { dark, neobrutalism, shadesOfPurple } from "@clerk/themes";
+import { BaseThemeTaggedType, Theme } from "@clerk/types/dist/appearance";
 
 export default function UserSignIn() {
   return (
