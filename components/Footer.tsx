@@ -1,9 +1,4 @@
-import {
-  AtSignIcon,
-  FacebookIcon,
-  InstagramIcon,
-  YoutubeIcon,
-} from "lucide-react";
+import { AtSignIcon, FacebookIcon, InstagramIcon } from "lucide-react";
 import Link from "next/link";
 import Container from "@/components/Container";
 
@@ -16,30 +11,24 @@ export default function Footer() {
             &copy;2024 albatross. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-2">
             <Link
               className="cursor-pointer"
               href={`${process.env.NEXT_PUBLIC_PORTFOLIO_LINK}`}
             >
-              <AtSignIcon size={24} />
+              <AtSignIcon size={20} />
             </Link>
             <Link
               className="cursor-pointer"
               href={`${process.env.NEXT_PUBLIC_PORTFOLIO_LINK}`}
             >
-              <FacebookIcon size={24} />
+              <FacebookIcon size={20} />
             </Link>
             <Link
               className="cursor-pointer"
               href={`${process.env.NEXT_PUBLIC_PORTFOLIO_LINK}`}
             >
-              <InstagramIcon size={24} />
-            </Link>
-            <Link
-              className="cursor-pointer"
-              href={`${process.env.NEXT_PUBLIC_PORTFOLIO_LINK}`}
-            >
-              <YoutubeIcon size={24} />
+              <InstagramIcon size={20} />
             </Link>
           </div>
         </div>

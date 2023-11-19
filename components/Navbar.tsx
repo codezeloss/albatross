@@ -19,9 +19,10 @@ export default function Navbar() {
           <Link
             href="/"
             className="text-2xl md:text-3xl font-bold text-black dark:text-white flex items-center gap-2 gap-x-2"
+            title="albatross"
           >
             <KanbanSquare size={29} />
-            albatross
+            <p className="hidden sm:flex">albatross</p>
           </Link>
 
           <div className="flex items-center space-x-3">

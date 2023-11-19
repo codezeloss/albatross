@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             >
               <div className="w-full h-full min-h-screen flex flex-col justify-between">
                 <Navbar />
-                <main className="px-3 sm:px-6 w-full h-full pb-6 mb-8 sm:mb-11">
+                <main className="px-3 sm:px-6 w-full h-full pb-6 mb-4 sm:mb-11">
                   <Container>
                     <CreateTaskModal />
                     <MainNavigation />

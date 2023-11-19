@@ -52,7 +52,7 @@ export async function GET(
         userId: params.userId,
       },
       orderBy: {
-        updatedAt: "desc",
+        createdAt: "desc",
       },
     });
 
