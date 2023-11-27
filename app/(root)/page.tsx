@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className={`${inter.className} py-6`}>
       <Container>
-        <div className="py-8 flex flex-col space-y-14 lg:space-y-16 items-center justify-center">
+        <div className="pt-8 pb-2 flex flex-col space-y-14 lg:space-y-16 items-center justify-center">
           <Hero user={userId} />
 
           <div className="w-full h-full">
